@@ -23,10 +23,11 @@ export default function App() {
         {surahList.length > 0 ? (
           surahList.map((surah) => (
             <div key={surah.nomor} className="border p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold">{surah.nama}</h2>
-              <p className="text-gray-600">{surah.nama_latin}</p>
-              <p className="mt-2">Jumlah Ayat: {surah.jumlah_ayat}</p>
-              <p>Tempat Turun: {surah.tempat_turun}</p>
+              <span className='float-right'> <h2 className="text-xl font-semibold">{surah.nama}</h2></span>
+              <p className="font-semibold">{surah.nama_latin}</p>
+              <p className="italic text-gray-600">{surah.arti}</p>
+              {/* <p className="mt-2">Jumlah Ayat: {surah.jumlah_ayat}</p>
+              <p>Tempat Turun: {surah.tempat_turun}</p> */}
             </div>
           ))
         ) : (
