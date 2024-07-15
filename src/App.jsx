@@ -1,19 +1,38 @@
-import {useEffect, useState} from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function App() {
-  const [Surah, SetSurah] = useState(null)
-  
+  const [surahList, setSurahList] = useState([]);
 
-  useEffect(()=>{
-   axios.get('https://quran-api.santrikoding.com/api/surah').then(function(response){
-    SetSurah(response.data.data)
-    console.log(response)
-   })
-  },[])
-
+  useEffect(() => {
+    axios
+      .get('https://quran-api.santrikoding.com/api/surah')
+      .then((response) => {
+        setSurahList(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
-    <div className=''>App</div>
-  )
+    <div className="container mx-auto px-4">
+      <h1 className="text-3xl font-bold text-center my-4">List of Surah</h1>
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {surahList.length > 0 ? (
+          surahList.map((surah) => (
+            <div key={surah.nomor} className="border p-4 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold">{surah.nama}</h2>
+              <p className="text-gray-600">{surah.nama_latin}</p>
+              <p className="mt-2">Jumlah Ayat: {surah.jumlah_ayat}</p>
+              <p>Tempat Turun: {surah.tempat_turun}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-center">Loading...</p>
+        )}
+      </div>
+    </div>
+  );
 }
