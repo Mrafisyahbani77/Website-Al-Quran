@@ -31,24 +31,37 @@ export default function App() {
   return (
     <div className="container mx-auto px-4 min-h-screen flex flex-col">
       <h1 className="text-3xl font-bold my-4">Al-Quran</h1>
-      <h1 className="text-3xl font-bold text-center my-4">List of Surah</h1>
+      <h2 className="text-3xl font-bold text-center my-4">List of Surah</h2>
+      <hr className="border-t-2 border-gray-300 my-4 mb-10" />
       {selectedSurah ? (
         <SurahDetail surah={selectedSurah} />
       ) : (
-        <div className="flex-grow flex justify-center items-center">
+        <div className="flex-grow">
           {surahList.length > 0 ? (
-            <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {surahList.map((surah) => (
                 <div
                   key={surah.nomor}
-                  className="border p-4 rounded-lg shadow-md cursor-pointer"
+                  className="border rounded-lg p-4 cursor-pointer hover:shadow-md hover:shadow-purple-500 flex items-center justify-between"
                   onClick={() => handleClickSurah(surah.nomor)}
                 >
-                  <span className="float-right">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-gray-600 transform rotate-45 rounded-lg flex items-center justify-center">
+                      <p className="font-semibold transform -rotate-45">
+                        {surah.nomor}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="">
+                    <p className="font-semibold">{surah.nama_latin}</p>
+                    <p className="italic text-xs md:text-sm text-gray-600">
+                      {surah.arti}
+                    </p>
+                  </div>
+                  <div className="text-right">
                     <h2 className="text-xl font-semibold">{surah.nama}</h2>
-                  </span>
-                  <p className="font-semibold">{surah.nama_latin}</p>
-                  <p className="italic text-gray-600">{surah.arti}</p>
+                    <p>{surah.jumlah_ayat} Ayat</p>
+                  </div>
                 </div>
               ))}
             </div>
