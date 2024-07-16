@@ -56,7 +56,7 @@ export default function App() {
       
       <div className="relative hover:shadow-purple-400 hover:shadow-md mt-2 p-4 mx-3 max-w-[27%] md:max-w-[8%] rounded-full border-slate-700 border">
           <button
-            className={`absolute top-0 left-0 px-3 py-2 bg-gradient-to-l to-purple-400 from-cyan-500  text-white rounded-full transform transition-transform duration-300 ${
+            className={`absolute top-0 left-0 px-3 py-2 bg-gradient-to-l to-gray-500 from-gray-700 text-white rounded-full transform transition-transform duration-300 ${
               isShifted ? "translate-x-10" : "translate-x-0"
             }`}
             onClick={toggleDarkMode}
