@@ -34,16 +34,23 @@ export default function SurahDetail({ surah }) {
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-4">{selectedSurah.nama}</h2>
         <span className='float-right'>
-        <audio key={selectedSurah.audio} controls className="mt-4">
-          <source src={selectedSurah.audio} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
+          <audio key={selectedSurah.audio} controls className="mt-4">
+            <source src={selectedSurah.audio} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
         </span>
         <p className="font-semibold">{selectedSurah.nama_latin}</p>
         <p className="italic text-gray-400">{selectedSurah.arti}</p>
         <p>Jumlah Ayat: {selectedSurah.jumlah_ayat}</p>
         <p>Tempat Turun: {selectedSurah.tempat_turun}</p>
         <p className="mt-4" dangerouslySetInnerHTML={{ __html: selectedSurah.deskripsi }}></p>
+        {selectedSurah.ayat && selectedSurah.ayat.map((ayat) => (
+          <div key={ayat.id} className="mt-4">
+            <p className="text-xl">{ayat.nomor}. {ayat.ar}</p>
+            <p className="text-gray-400">{ayat.tr}</p>
+            <p className="text-gray-300">{ayat.idn}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
