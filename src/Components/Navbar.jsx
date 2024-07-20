@@ -47,7 +47,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <main className="relative bg-yellow-500 py-10 px-7 min-h-screen flex flex-col items-center justify-center">
+      <main className="relative bg-gray-500 py-10 px-7 min-h-screen flex flex-col items-center justify-center">
         <Particle className="absolute top-0 left-0 w-full h-full" />
         <div className="relative z-10 text-center space-y-6">
           <img
@@ -58,11 +58,11 @@ export default function Navbar() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
             Al-Qur'an Online
           </h1>
-          <h3 className="text-lg md:text-xl lg:text-2xl text-white">
+          <h3 className="text-lg md:text-xl lg:text-2xl text-gray-300 font-sans">
             Baca Al-Qur'an secara online dimana dan kapanpun saja dengan mudah.
           </h3>
           <a href="#list-alquran" className="mt-6 inline-block">
-            <button className="px-6 py-3 bg-white text-yellow-500 rounded-full text-lg md:text-xl font-semibold hover:bg-yellow-600 hover:text-white transition duration-300">
+            <button className="px-6 py-3 bg-white text-black rounded-full text-lg md:text-xl font-semibold hover:bg-black hover:text-yellow-500 transition duration-300">
               Mulai Membaca
             </button>
           </a>

@@ -35,10 +35,9 @@ export default function SurahList() {
   return (
     <>
     <Navbar/>
-      <div id="list-alquran" className="container mb-20 mx-auto px-4 min-h-screen flex flex-col">
-        <hr className="border-t-2 border-gray-300 my-4 mb-10" />
+      <div id="list-alquran" className="container my-20 mx-auto px-4 min-h-screen flex flex-col">
         <h2 className="text-3xl font-bold text-center my-4">List of Surah</h2>
-        <div className="mb-10 mt-20">
+        <div className="mb-10 mt-10">
           <input
             type="text"
             className="w-full p-2 border border-gray-300 rounded"
