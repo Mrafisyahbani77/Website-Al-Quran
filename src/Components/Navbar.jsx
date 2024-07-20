@@ -3,7 +3,7 @@ import { IoMoon } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import Particle from "./Particle";
 import Icon1 from "../assets/icon1.png";
-import SurahList from "../List/SurahList";
+import Icon2 from "../assets/icon2.jpeg";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -30,21 +30,17 @@ export default function Navbar() {
     <>
       <nav className="bg-gray-800 dark:bg-gray-900 p-5 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-white">Al-Quran</h1>
-          <div className="relative hover:shadow-purple-400 hover:shadow-md mt-2 p-1 mx-3 max-w-[5%] rounded-full border-slate-700 border">
-            <button
-              className={`bg-black  text-white p-2 rounded-full transition-transform duration-300 ${
-                isShifted ? "translate-x-6" : "translate-x-0"
-              }`}
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? (
-                <IoSunnyOutline className="text-yellow-400" />
-              ) : (
-                <IoMoon className="text-white" />
-              )}
-            </button>
-          </div>
+          <span className="flex">
+            <img src={Icon2} alt="Icon" className="w-10 mr-3 rounded-xl h-10" />
+            <h1 className="text-3xl font-bold text-white">Al-Quran</h1>
+          </span>
+
+          <button
+            className="px-2 py-2 bg-black text-white rounded-full"
+            onClick={toggleDarkMode}
+          >
+            {darkMode ? <IoSunnyOutline /> : <IoMoon />}
+          </button>
         </div>
       </nav>
       <main className="relative bg-gray-500 py-10 px-7 min-h-screen flex flex-col items-center justify-center">

@@ -41,7 +41,7 @@ export default function SurahList() {
           <input
             type="text"
             className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Search by Surah name..."
+            placeholder="example search al-fatihah"
             value={searchQuery}
             onChange={handleSearchChange}
           />
@@ -63,9 +63,9 @@ export default function SurahList() {
                       </p>
                     </div>
                   </div>
-                  <div className="">
+                  <div className="text-center">
                     <p className="font-semibold">{surah.nama_latin}</p>
-                    <p className="italic group-hover:text-purple-500 text-xs md:text-sm text-gray-600">
+                    <p className="italic group-hover:text-purple-500 text-xs md:text-xs text-gray-600">
                       {surah.arti}
                     </p>
                   </div>
