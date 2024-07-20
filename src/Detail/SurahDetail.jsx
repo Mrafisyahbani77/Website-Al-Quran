@@ -89,12 +89,6 @@ export default function SurahDetail({ surahLi }) {
     return result;
   };
 
-  const removeTags = (html) => {
-    if (!html) return "";
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent || "";
-  };
-
   const formatTransliteration = (str) => {
     return str.replace(/<\/?[^>]+(>|$)/g, "");
   };
@@ -112,12 +106,12 @@ export default function SurahDetail({ surahLi }) {
       <div className="container mx-auto px-4 py-8">
         <Link
           to="/"
-          className="hover:bg-white w-full text-center rounded-md transition duration-300 ease-in-out hover:py-2 py-2 hover:text-slate-800"
+          className="hover:text-yellow-500 bg-black w-full text-center px-2 rounded-md hover:py-2 py-2 text-white-800"
         >
-          Home
+         Back Home
         </Link>
         <Navbar surahList={surah} handleClickSurah={handleClickSurah} />
-        <div className="my-8">
+        <div className="my-24">
           <h2 className="text-4xl font-bold text-center">{surah.nama}</h2>
           <p className="text-2xl font-semibold text-center">
             {surah.nama_latin}
@@ -191,16 +185,10 @@ export default function SurahDetail({ surahLi }) {
             </div>
           </div>
         </div>
-        <div
-          className="mt-20"
-          dangerouslySetInnerHTML={{
-            __html: removeTags(surah.deskripsi),
-          }}
-        ></div>
         <div>
           {surah.ayat &&
             surah.ayat.map((ayat) => (
-              <div key={ayat.id} className="mt-10">
+              <div key={ayat.id} className="mt-40">
                 <p className="text-2xl flex justify-between items-center text-right">
                   <span className="text-left mr-4">
                     {numberToArabic(ayat.nomor)}.
