@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Navbar from "../Components/Navbar";
 import { Link, useParams } from "react-router-dom";
-import Spinner from "../Components/Loader"; // Import the Spinner component
+import Spinner from "../Components/Loader";
+import { IoLocationSharp } from "react-icons/io5";
+import { FaListOl } from "react-icons/fa";
 
 export default function SurahDetail({ surahLi }) {
   const { nomor } = useParams();
@@ -14,7 +16,6 @@ export default function SurahDetail({ surahLi }) {
   const [duration, setDuration] = useState(0);
   const [selectedSurah, setSelectedSurah] = useState(surahLi);
 
-  
   const handleClickSurah = (surahNomor) => {
     axios
       .get(`https://quran-api.santrikoding.com/api/surah/${surahNomor}`)
@@ -108,7 +109,7 @@ export default function SurahDetail({ surahLi }) {
           to="/"
           className="hover:text-yellow-500 bg-black w-full text-center px-2 rounded-md hover:py-2 py-2 text-white-800"
         >
-         Back Home
+          Back Home
         </Link>
         <Navbar surahList={surah} handleClickSurah={handleClickSurah} />
         <div className="my-24">
@@ -117,8 +118,14 @@ export default function SurahDetail({ surahLi }) {
             {surah.nama_latin}
           </p>
           <p className="italic text-gray-400 text-center">{surah.arti}</p>
-          <p className="text-center">Jumlah Ayat: {surah.jumlah_ayat}</p>
-          <p className="text-center">Tempat Turun: {surah.tempat_turun}</p>
+          <p className="text-center flex items-center justify-center">
+            <FaListOl className="mr-2" /> Jumlah Ayat: {surah.jumlah_ayat}
+          </p>
+          <p className="text-center flex items-center justify-center">
+            <IoLocationSharp className="mr-2" /> Tempat Turun:
+            {surah.tempat_turun}
+          </p>
+
           <div className="text-center mt-4">
             <div className="flex flex-col items-center space-y-2 w-full">
               <audio
