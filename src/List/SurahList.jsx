@@ -1,33 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { IoSunnyOutline } from "react-icons/io5";
-import { IoMoon } from "react-icons/io5";
 import Footer from "../Components/Footer";
+import Navbar from "../Components/Navbar";
 
 export default function SurahList() {
   const [surahList, setSurahList] = useState([]);
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem("darkMode");
-    return savedMode ? JSON.parse(savedMode) : false;
-  });
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const [isShifted, setIsShifted] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    setIsShifted(!isShifted);
-  };
 
   useEffect(() => {
     axios
@@ -54,28 +34,11 @@ export default function SurahList() {
 
   return (
     <>
-      <div className="container mb-20 mx-auto px-4 min-h-screen flex flex-col">
-        <h1 className="text-3xl font-bold my-4">Al-Quran</h1>
-
-        <div className="relative hover:shadow-purple-400 hover:shadow-md mt-2 p-4 mx-3 max-w-[27%] md:max-w-[8%] rounded-full border-slate-700 border">
-          <button
-            className={`absolute top-0 left-0 px-3 py-2 bg-gradient-to-l to-gray-500 from-gray-700 text-white rounded-full transform transition-transform duration-300 ${
-              isShifted ? "translate-x-10" : "translate-x-0"
-            }`}
-            onClick={toggleDarkMode}
-          >
-            {darkMode ? (
-              <IoSunnyOutline className="text-yellow-30" />
-            ) : (
-              <IoMoon className="text-black" />
-            )}
-          </button>
-        </div>
-
-        <h2 className="text-3xl font-bold text-center my-4">List of Surah</h2>
-
+    <Navbar/>
+      <div id="list-alquran" className="container mb-20 mx-auto px-4 min-h-screen flex flex-col">
         <hr className="border-t-2 border-gray-300 my-4 mb-10" />
-        <div className="mb-10">
+        <h2 className="text-3xl font-bold text-center my-4">List of Surah</h2>
+        <div className="mb-10 mt-20">
           <input
             type="text"
             className="w-full p-2 border border-gray-300 rounded"
@@ -123,7 +86,7 @@ export default function SurahList() {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

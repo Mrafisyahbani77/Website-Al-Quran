@@ -6,7 +6,7 @@ import Spinner from "../Components/Loader";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaListOl } from "react-icons/fa";
 
-export default function SurahDetail({ surahLi }) {
+export default function SurahDetail() {
   const { nomor } = useParams();
   const [surah, setSurah] = useState(null);
   const [loading, setLoading] = useState(true); // State for loading
@@ -14,18 +14,6 @@ export default function SurahDetail({ surahLi }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [selectedSurah, setSelectedSurah] = useState(surahLi);
-
-  const handleClickSurah = (surahNomor) => {
-    axios
-      .get(`https://quran-api.santrikoding.com/api/surah/${surahNomor}`)
-      .then((response) => {
-        setSelectedSurah(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching surah details:", error);
-      });
-  };
 
   useEffect(() => {
     axios
@@ -111,7 +99,6 @@ export default function SurahDetail({ surahLi }) {
         >
           Back Home
         </Link>
-        <Navbar surahList={surah} handleClickSurah={handleClickSurah} />
         <div className="my-24">
           <h2 className="text-4xl font-bold text-center">{surah.nama}</h2>
           <p className="text-2xl font-semibold text-center">
