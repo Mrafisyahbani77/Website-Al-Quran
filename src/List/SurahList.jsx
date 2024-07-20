@@ -10,6 +10,7 @@ export default function SurahList() {
     const savedMode = localStorage.getItem("darkMode");
     return savedMode ? JSON.parse(savedMode) : false;
   });
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const [isShifted, setIsShifted] = useState(false);
 
@@ -42,6 +43,14 @@ export default function SurahList() {
     navigate(`/surah/${surahNomor}`);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredSurahList = surahList.filter((surah) =>
+    surah.nama_latin.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="container mx-auto px-4 min-h-screen flex flex-col">
       <h1 className="text-3xl font-bold my-4">Al-Quran</h1>
@@ -62,11 +71,23 @@ export default function SurahList() {
       </div>
 
       <h2 className="text-3xl font-bold text-center my-4">List of Surah</h2>
+      
+      <div className="mb-4">
+        <input
+          type="text"
+          className="w-full p-2 border border-gray-300 rounded"
+          placeholder="Search by Latin name..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
+
       <hr className="border-t-2 border-gray-300 my-4 mb-10" />
+
       <div className="flex-grow">
-        {surahList.length > 0 ? (
+        {filteredSurahList.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {surahList.map((surah) => (
+            {filteredSurahList.map((surah) => (
               <div
                 key={surah.nomor}
                 className="border rounded-lg group p-4 cursor-pointer hover:shadow-md hover:shadow-purple-500 flex items-center justify-between"
