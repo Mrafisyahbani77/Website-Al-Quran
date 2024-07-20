@@ -40,7 +40,7 @@ export default function SurahList() {
         <div className="mb-10 mt-10">
           <input
             type="text"
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 text-black border border-gray-300 rounded"
             placeholder="example search al-fatihah"
             value={searchQuery}
             onChange={handleSearchChange}
