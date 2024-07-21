@@ -69,7 +69,7 @@ export default function SurahDetail() {
   const numberToArabic = (number) => {
     const arabicNumerals = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
-    if (number < 1 || number > 100) {
+    if (number < 1 || number > 500) {
       return number.toString();
     }
 
@@ -109,7 +109,7 @@ export default function SurahDetail() {
             {prevSurah && (
               <Link
                 to={`/surah/${prevSurah.nomor}`}
-                className="bg-yellow-400 hover:text-white text-black px-4 py-2 rounded-lg text-md"
+                className="bg-black hover:text-yellow-500 text-white px-4 py-2 rounded-lg text-sm"
               >
                 Surah Sebelumnya ({prevSurah.nama_latin})
               </Link>
@@ -117,7 +117,7 @@ export default function SurahDetail() {
             {nextSurah && (
               <Link
                 to={`/surah/${nextSurah.nomor}`}
-                className="bg-yellow-400 hover:text-white text-black px-4 py-2 rounded-lg text-md"
+                className="bg-black hover:text-yellow-500 text-white px-4 py-2 rounded-lg text-sm"
               >
                 Surah Selanjutnya ({nextSurah.nama_latin})
               </Link>
@@ -212,7 +212,7 @@ export default function SurahDetail() {
                 <div key={ayat.id} className="mt-40">
                   <p className="text-2xl flex justify-between items-center text-right">
                     <span className="text-left rounded-full px-2 bg-black mr-4">
-                      {numberToArabic(ayat.nomor)}.
+                      {numberToArabic(ayat.nomor)}
                     </span>
                     <span>{ayat.ar}</span>
                   </p>
@@ -228,7 +228,7 @@ export default function SurahDetail() {
             {prevSurah && (
               <Link
                 to={`/surah/${prevSurah.nomor}`}
-                className="hover:shadow-yellow-300 hover:shadow-md bg-yellow-400 hover:bg-yellow-500 py-2 text-black px-4 rounded-lg text-md"
+                className="bg-black hover:text-yellow-500 text-white px-4 py-2 rounded-lg text-sm"
               >
                 Surah Sebelumnya ({prevSurah.nama_latin})
               </Link>
@@ -236,7 +236,7 @@ export default function SurahDetail() {
             {nextSurah && (
               <Link
                 to={`/surah/${nextSurah.nomor}`}
-                className="hover:shadow-yellow-300 hover:shadow-md bg-yellow-400 hover:bg-yellow-500 text-black px-4 rounded-lg text-md py-2"
+                className="bg-black hover:text-yellow-500 text-white px-4 py-2 rounded-lg text-sm"
               >
                 Surah Selanjutnya ({nextSurah.nama_latin})
               </Link>
