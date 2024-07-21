@@ -18,6 +18,8 @@ export default function SurahDetail() {
   const [nextSurah, setNextSurah] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the component is rendered or updated
+
     axios
       .get(`https://quran-api.santrikoding.com/api/surah/${nomor}`)
       .then((response) => {
@@ -105,7 +107,7 @@ export default function SurahDetail() {
           >
             Back Home
           </Link>
-          <div className="cursor-pointer flex justify-between mt-10">
+          <div className="items-center justify-center text-center cursor-pointer flex space-x-4 mt-10">
             {prevSurah && (
               <Link
                 to={`/surah/${prevSurah.nomor}`}
@@ -123,7 +125,6 @@ export default function SurahDetail() {
               </Link>
             )}
           </div>
-
           <div className="my-24">
             <h2 className="text-4xl font-bold text-center">{surah.nama}</h2>
             <p className="text-2xl font-semibold text-center">
