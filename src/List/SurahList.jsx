@@ -11,6 +11,7 @@ import {
 import { IoLocationSharp, IoSearchOutline } from "react-icons/io5";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
+import Icon2 from "../assets/icon2.jpeg";
 
 export default function SurahList() {
   const [surahList, setSurahList] = useState([]);
@@ -62,7 +63,7 @@ export default function SurahList() {
         <div className="text-center">
           <div className="relative">
             <div className="w-20 h-20 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <FaQuran className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl text-yellow-400" />
+            <img src={Icon2} alt="Al-Quran Icon" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl w-8 h-8" />
           </div>
           <p className="text-white text-lg">Memuat Daftar Surah...</p>
         </div>
@@ -78,9 +79,9 @@ export default function SurahList() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full">
+            {/* <div className="p-3 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full">
               <FaQuran className="text-2xl text-slate-900" />
-            </div>
+            </div> */}
             <h1 className="text-4xl md:text-5xl font-bold text-white">
               Daftar Surah Al-Quran
             </h1>

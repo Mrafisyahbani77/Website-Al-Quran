@@ -12,17 +12,17 @@
     "dir": "rtl",
     "icons": [
       {
-        "src": "icons/quran-192.png",
+        "src": "src/assets/icon2.jpeg",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "icons/quran-512.png",
+        "src": "src/assets/icon2.jpeg",
         "sizes": "512x512",
         "type": "image/png"
       },
       {
-        "src": "icons/quran-maskable.png",
+        "src": "src/assets/icon2.jpeg",
         "sizes": "512x512",
         "type": "image/png",
         "purpose": "maskable"
