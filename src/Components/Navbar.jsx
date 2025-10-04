@@ -1,302 +1,116 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import {
-  FaSearch,
-  FaQuran,
-  FaListOl,
-  FaBookOpen,
-  FaPlay,
-} from "react-icons/fa";
-import { IoLocationSharp, IoSearchOutline } from "react-icons/io5";
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+import { IoSunnyOutline } from "react-icons/io5";
+import { IoMoon } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import Particle from "./Particle";
+import Icon1 from "../assets/icon1.png";
 import Icon2 from "../assets/icon2.jpeg";
 
-export default function SurahList() {
-  const [surahList, setSurahList] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [hoveredSurah, setHoveredSurah] = useState(null);
-  const navigate = useNavigate();
+export default function Navbar() {
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+  const [isShifted, setIsShifted] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("https://quran-api.santrikoding.com/api/surah")
-      .then((response) => {
-        setSurahList(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  }, []);
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
 
-  const handleClickSurah = (surahNomor) => {
-    navigate(`/surah/${surahNomor}`);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    setIsShifted(!isShifted);
   };
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const filteredSurahList = surahList.filter(
-    (surah) =>
-      surah.nama_latin.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      surah.arti.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const numberToArabic = (number) => {
-    const arabicNumerals = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-    let result = "";
-    const digits = number.toString().split("");
-    digits.forEach((digit) => {
-      result += arabicNumerals[parseInt(digit, 10)];
-    });
-    return result;
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="relative">
-            <div className="w-20 h-20 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <img src={Icon2} alt="Al-Quran Icon" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl w-8 h-8" />
-          </div>
-          <p className="text-white text-lg">Memuat Daftar Surah...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <Navbar />
-
-      {/* ID untuk scroll target */}
-      <div id="list-alquran" className="container mx-auto px-4 py-8">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-4">
-            {/* <div className="p-3 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full">
-              <FaQuran className="text-2xl text-slate-900" />
-            </div> */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
-              Daftar Surah Al-Quran
+    <>
+      <nav className="bg-gradient-to-r from-[#1B4332] via-[#2D5F4D] to-[#1B4332] p-5 shadow-2xl border-b-4 border-[#F4C542]">
+        <div className="container mx-auto flex justify-between items-center">
+          <span className="flex items-center gap-3 group">
+            <div className="relative">
+              <img 
+                src={Icon2} 
+                alt="Icon" 
+                className="w-12 h-12 rounded-xl border-2 border-[#F4C542] group-hover:scale-110 transition-transform duration-300 shadow-lg" 
+              />
+              <div className="absolute inset-0 bg-[#F4C542]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <h1 className="text-3xl font-bold text-[#EADCC8] group-hover:text-[#F4C542] transition-colors duration-300">
+              Al-Quran
             </h1>
-          </div>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
-            Jelajahi 114 surah dalam Al-Quran dengan terjemahan dan audio yang
-            mudah diakses
-          </p>
+          </span>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-2xl mx-auto">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
-              <div className="text-2xl font-bold text-yellow-400">
-                {surahList.length}
-              </div>
-              <div className="text-slate-300 text-sm">Total Surah</div>
-            </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
-              <div className="text-2xl font-bold text-yellow-400">6,236</div>
-              <div className="text-slate-300 text-sm">Total Ayat</div>
-            </div>
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
-              <div className="text-2xl font-bold text-yellow-400">30</div>
-              <div className="text-slate-300 text-sm">Juz/Para</div>
-            </div>
-          </div>
+          {/* <button
+            className="px-3 py-3 bg-[#F4C542] text-[#1B4332] rounded-full hover:bg-[#EADCC8] hover:scale-110 transition-all duration-300 shadow-lg"
+            onClick={toggleDarkMode}
+          >
+            {darkMode ? <IoSunnyOutline className="text-xl" /> : <IoMoon className="text-xl" />}
+          </button> */}
         </div>
-
-        {/* Search Section */}
-        <div className="mb-12">
-          <div className="relative max-w-2xl mx-auto">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <IoSearchOutline className="text-slate-400 text-xl" />
-            </div>
-            <input
-              type="text"
-              className="w-full pl-12 pr-4 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-200"
-              placeholder="Cari surah... (contoh: Al-Fatihah, Pembuka)"
-              value={searchQuery}
-              onChange={handleSearchChange}
+      </nav>
+      <main className="relative bg-gradient-to-br from-[#EADCC8] via-[#E8D4BF] to-[#DCC9B0] py-20 px-7 min-h-screen flex flex-col items-center justify-center">
+        <Particle className="absolute top-0 left-0 w-full h-full" />
+        
+        {/* Decorative elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-[#F4C542]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#1B4332]/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto">
+          <div className="relative inline-block">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F4C542] to-[#C84B31] rounded-full blur-2xl opacity-30 animate-pulse"></div>
+            <img
+              src={Icon1}
+              alt="img al-quran"
+              className="relative mx-auto rounded-full bg-white border-4 border-[#F4C542] w-48 md:w-56 lg:w-64 shadow-2xl hover:scale-105 transition-transform duration-300"
             />
-            {searchQuery && (
-              <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="text-slate-400 hover:text-white transition-colors duration-200"
-                >
-                  ✕
-                </button>
-              </div>
-            )}
           </div>
-
-          {searchQuery && (
-            <div className="text-center mt-4">
-              <p className="text-slate-300">
-                Ditemukan{" "}
-                <span className="font-semibold text-yellow-400">
-                  {filteredSurahList.length}
-                </span>{" "}
-                surah untuk pencarian "
-                <span className="text-yellow-400">{searchQuery}</span>"
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Surah List */}
-        <div className="mb-12">
-          {filteredSurahList.length > 0 ? (
-            <div className="grid gap-4 md:gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {filteredSurahList.map((surah, index) => (
-                <div
-                  key={surah.nomor}
-                  className="group bg-slate-800/30 backdrop-blur-sm border border-slate-700 rounded-xl p-6 cursor-pointer transition-all duration-300 hover:bg-slate-800/50 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 hover:-translate-y-1"
-                  onClick={() => handleClickSurah(surah.nomor)}
-                  onMouseEnter={() => setHoveredSurah(surah.nomor)}
-                  onMouseLeave={() => setHoveredSurah(null)}
+          
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1B4332] leading-tight">
+              Al-Qur'an Online
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#F4C542] to-transparent mx-auto"></div>
+          </div>
+          
+          <h3 className="text-xl md:text-2xl lg:text-3xl text-[#5A3825] font-medium max-w-2xl mx-auto leading-relaxed">
+            Baca Al-Qur'an secara online dimana dan kapanpun saja dengan mudah.
+          </h3>
+          
+          <a href="#list-alquran" className="mt-8 inline-block group">
+            <button className="relative px-8 py-4 bg-gradient-to-r from-[#1B4332] to-[#2D5F4D] text-[#EADCC8] rounded-2xl text-xl md:text-2xl font-bold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">
+              <span className="relative z-10 flex items-center gap-3">
+                Mulai Membaca
+                <svg 
+                  className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
                 >
-                  {/* Header with Number */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center transform transition-transform duration-300 group-hover:scale-110">
-                        <span className="font-bold text-slate-900 text-lg">
-                          {surah.nomor}
-                        </span>
-                      </div>
-                      {hoveredSurah === surah.nomor && (
-                        <div className="absolute -top-2 -right-2 bg-yellow-400 text-slate-900 rounded-full p-1">
-                          <FaPlay className="text-xs" />
-                        </div>
-                      )}
-                    </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1B4332] to-[#C84B31] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+          </a>
 
-                    <div className="text-right">
-                      <div className="text-2xl md:text-3xl font-bold text-white mb-1 font-arabic">
-                        {surah.nama}
-                      </div>
-                      <div className="text-yellow-400 text-sm">
-                        {numberToArabic(surah.nomor)}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="space-y-3">
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors duration-200">
-                        {surah.nama_latin}
-                      </h3>
-                      <p className="text-slate-400 italic text-sm">
-                        {surah.arti}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-3 border-t border-slate-700">
-                      <div className="flex items-center gap-2 text-slate-400 text-sm">
-                        <FaListOl className="text-yellow-400" />
-                        <span>{surah.jumlah_ayat} Ayat</span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-slate-400 text-sm">
-                        <IoLocationSharp className="text-yellow-400" />
-                        <span>{surah.tempat_turun}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"></div>
-                </div>
-              ))}
+          {/* Feature badges */}
+          <div className="flex flex-wrap justify-center gap-4 mt-12 pt-8">
+            <div className="bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border-2 border-[#F4C542]/30 shadow-md hover:shadow-lg transition-all duration-300">
+              <span className="text-[#1B4332] font-semibold text-sm">📖 114 Surah</span>
             </div>
-          ) : (
-            <div className="text-center py-20">
-              <div className="mb-6">
-                <FaSearch className="text-6xl text-slate-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  Surah Tidak Ditemukan
-                </h3>
-                <p className="text-slate-400 max-w-md mx-auto">
-                  Tidak ada surah yang sesuai dengan pencarian "{searchQuery}".
-                  Coba gunakan kata kunci lain.
-                </p>
-              </div>
-              <button
-                onClick={() => setSearchQuery("")}
-                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-slate-900 px-6 py-3 rounded-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-colors duration-200"
-              >
-                Tampilkan Semua Surah
-              </button>
+            <div className="bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border-2 border-[#F4C542]/30 shadow-md hover:shadow-lg transition-all duration-300">
+              <span className="text-[#1B4332] font-semibold text-sm">🎧 Audio Tersedia</span>
             </div>
-          )}
-        </div>
-
-        {/* Quick Navigation */}
-        {/* {filteredSurahList.length > 0 && (
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
-            <h3 className="text-lg font-semibold text-white mb-4 text-center">
-              Navigasi Cepat
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <button
-                onClick={() =>
-                  document
-                    .getElementById(`surah-1`)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
-              >
-                🏠 Al-Fatihah
-              </button>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById(`surah-2`)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
-              >
-                📖 Al-Baqarah
-              </button>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById(`surah-18`)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
-              >
-                🏞️ Al-Kahf
-              </button>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById(`surah-36`)
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
-              >
-                💖 Yasin
-              </button>
+            <div className="bg-white/80 backdrop-blur-sm px-5 py-3 rounded-full border-2 border-[#F4C542]/30 shadow-md hover:shadow-lg transition-all duration-300">
+              <span className="text-[#1B4332] font-semibold text-sm">🌐 Akses Gratis</span>
             </div>
           </div>
-        )} */}
-      </div>
-
-      <Footer />
-
-      <style jsx>{`
-        .font-arabic {
-          font-family: "Amiri", "Scheherazade New", "Arabic Typesetting", serif;
-        }
-      `}</style>
-    </div>
+        </div>
+      </main>
+    </>
   );
 }

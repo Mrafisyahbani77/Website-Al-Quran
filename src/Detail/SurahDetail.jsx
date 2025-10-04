@@ -96,39 +96,39 @@ export default function SurahDetail() {
 
   if (!surah) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-center">
-          <FaQuran className="text-6xl mx-auto mb-4 text-yellow-400" />
-          <h2 className="text-2xl font-bold">Surah tidak ditemukan</h2>
+      <div className="min-h-screen bg-gradient-to-br from-[#EADCC8] via-[#F5E6D3] to-[#E8D4BF] flex items-center justify-center">
+        <div className="text-center">
+          <FaQuran className="text-6xl mx-auto mb-4 text-[#C84B31]" />
+          <h2 className="text-2xl font-bold text-[#1B4332]">Surah tidak ditemukan</h2>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#EADCC8] via-[#F5E6D3] to-[#E8D4BF]">
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700">
+      <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b-4 border-[#F4C542] shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link
               to="/"
-              className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors duration-200 bg-slate-800 px-4 py-2 rounded-lg hover:bg-slate-700"
+              className="flex items-center gap-2 text-[#1B4332] hover:text-[#F4C542] transition-all duration-300 bg-[#EADCC8] px-4 py-2 rounded-xl hover:bg-[#F4C542] hover:text-[#1B4332] font-semibold shadow-md hover:shadow-lg hover:scale-105"
             >
               <IoHome className="text-lg" />
               <span className="hidden sm:inline">Beranda</span>
             </Link>
             
-            <div className="text-center text-white">
+            <div className="text-center text-[#1B4332]">
               <h1 className="text-lg sm:text-xl font-bold">{surah.nama_latin}</h1>
-              <p className="text-sm text-slate-300 hidden sm:block">{surah.arti}</p>
+              <p className="text-sm text-[#5A3825] hidden sm:block italic">{surah.arti}</p>
             </div>
             
             <div className="flex items-center gap-2">
               {prevSurah && (
                 <Link
                   to={`/surah/${prevSurah.nomor}`}
-                  className="p-2 text-white hover:text-yellow-400 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-200"
+                  className="p-2 text-[#1B4332] hover:text-white bg-[#EADCC8] rounded-xl hover:bg-[#1B4332] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-110"
                   title={`Surah ${prevSurah.nama_latin}`}
                 >
                   <IoChevronBackOutline className="text-lg" />
@@ -137,7 +137,7 @@ export default function SurahDetail() {
               {nextSurah && (
                 <Link
                   to={`/surah/${nextSurah.nomor}`}
-                  className="p-2 text-white hover:text-yellow-400 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-200"
+                  className="p-2 text-[#1B4332] hover:text-white bg-[#EADCC8] rounded-xl hover:bg-[#1B4332] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-110"
                   title={`Surah ${nextSurah.nama_latin}`}
                 >
                   <IoChevronForwardOutline className="text-lg" />
@@ -151,33 +151,39 @@ export default function SurahDetail() {
       <div className="container mx-auto px-4 py-8">
         {/* Surah Header */}
         <div className="text-center mb-12">
-          <div className="bg-gradient-to-r from-slate-800/50 to-blue-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 shadow-2xl">
-            <div className="mb-6">
-              <h2 className="text-5xl sm:text-6xl font-bold text-white mb-2 font-arabic">
+          <div className="bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-lg rounded-3xl p-8 border-4 border-[#F4C542] shadow-2xl relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#F4C542]/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#1B4332]/10 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10 mb-6">
+              <h2 className="text-5xl sm:text-6xl font-bold text-[#1B4332] mb-3 font-arabic">
                 {surah.nama}
               </h2>
-              <p className="text-2xl sm:text-3xl font-semibold text-yellow-400 mb-2">
+              <p className="text-2xl sm:text-3xl font-semibold text-[#F4C542] mb-2">
                 {surah.nama_latin}
               </p>
-              <p className="text-lg text-slate-300 italic mb-6">{surah.arti}</p>
+              <p className="text-lg text-[#5A3825] italic mb-6">{surah.arti}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-center justify-center gap-2 text-slate-300">
-                <FaListOl className="text-yellow-400" />
-                <span>Jumlah Ayat: <span className="font-semibold text-white">{surah.jumlah_ayat}</span></span>
+              <div className="flex items-center justify-center gap-3 text-[#5A3825] bg-[#EADCC8]/50 rounded-xl p-3">
+                <FaListOl className="text-[#F4C542] text-xl" />
+                <span className="font-medium">Jumlah Ayat: <span className="font-bold text-[#1B4332]">{surah.jumlah_ayat}</span></span>
               </div>
-              <div className="flex items-center justify-center gap-2 text-slate-300">
-                <IoLocationSharp className="text-yellow-400" />
-                <span>Tempat Turun: <span className="font-semibold text-white">{surah.tempat_turun}</span></span>
+              <div className="flex items-center justify-center gap-3 text-[#5A3825] bg-[#EADCC8]/50 rounded-xl p-3">
+                <IoLocationSharp className="text-[#C84B31] text-xl" />
+                <span className="font-medium">Tempat Turun: <span className="font-bold text-[#1B4332]">{surah.tempat_turun}</span></span>
               </div>
             </div>
 
             {/* Audio Player */}
-            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-600">
-              <div className="flex items-center gap-3 mb-3">
-                <IoVolumeHigh className="text-yellow-400 text-xl" />
-                <span className="text-white font-medium">Audio Surah</span>
+            <div className="bg-white/80 rounded-2xl p-5 border-2 border-[#1B4332]/20 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-gradient-to-br from-[#F4C542] to-[#C84B31] p-2 rounded-xl">
+                  <IoVolumeHigh className="text-white text-xl" />
+                </div>
+                <span className="text-[#1B4332] font-bold text-lg">Audio Surah</span>
               </div>
               
               <audio
@@ -193,29 +199,29 @@ export default function SurahDetail() {
                   type="range"
                   value={(currentTime / duration) * 100 || 0}
                   onChange={handleSeek}
-                  className="w-full h-2 bg-slate-700 rounded-full cursor-pointer appearance-none slider"
+                  className="w-full h-3 bg-[#EADCC8] rounded-full cursor-pointer appearance-none slider"
                   style={{
-                    background: `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${(currentTime / duration) * 100 || 0}%, #374151 ${(currentTime / duration) * 100 || 0}%, #374151 100%)`
+                    background: `linear-gradient(to right, #F4C542 0%, #F4C542 ${(currentTime / duration) * 100 || 0}%, #EADCC8 ${(currentTime / duration) * 100 || 0}%, #EADCC8 100%)`
                   }}
                 />
                 
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400 text-sm">
+                  <span className="text-[#5A3825] text-sm font-semibold bg-[#EADCC8] px-3 py-1 rounded-lg">
                     {formatTime(currentTime)}
                   </span>
                   
                   <button
                     onClick={isPlaying ? pauseAudio : playAudio}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 p-3 rounded-full transition-colors duration-200 shadow-lg"
+                    className="bg-gradient-to-br from-[#F4C542] to-[#C84B31] hover:from-[#C84B31] hover:to-[#F4C542] text-white p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
                   >
                     {isPlaying ? (
-                      <IoPause className="text-xl" />
+                      <IoPause className="text-2xl" />
                     ) : (
-                      <IoPlay className="text-xl ml-1" />
+                      <IoPlay className="text-2xl ml-1" />
                     )}
                   </button>
                   
-                  <span className="text-slate-400 text-sm">
+                  <span className="text-[#5A3825] text-sm font-semibold bg-[#EADCC8] px-3 py-1 rounded-lg">
                     {formatTime(duration)}
                   </span>
                 </div>
@@ -225,49 +231,49 @@ export default function SurahDetail() {
         </div>
 
         {/* Ayat List */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {surah.ayat &&
             surah.ayat.map((ayat, index) => (
               <div 
                 key={ayat.id} 
-                className={`bg-slate-800/30 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300 hover:bg-slate-800/50 ${
+                className={`bg-white/80 backdrop-blur-sm rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-2xl cursor-pointer ${
                   selectedAyat === ayat.id 
-                    ? 'border-yellow-400 shadow-lg shadow-yellow-400/20' 
-                    : 'border-slate-700 hover:border-slate-600'
+                    ? 'border-[#F4C542] shadow-xl shadow-[#F4C542]/30 scale-[1.02]' 
+                    : 'border-[#1B4332]/10 hover:border-[#F4C542]/50'
                 }`}
                 onClick={() => setSelectedAyat(selectedAyat === ayat.id ? null : ayat.id)}
               >
                 {/* Arabic Text */}
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-slate-900 font-bold text-sm">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#1B4332] to-[#2D5F4D] rounded-xl flex items-center justify-center text-[#F4C542] font-bold text-base shadow-lg">
                       {ayat.nomor}
                     </div>
                   </div>
                   <div className="flex-1 text-right">
-                    <p className="text-2xl sm:text-3xl md:text-4xl leading-loose text-white font-arabic mb-4 hover:text-yellow-100 transition-colors duration-200">
+                    <p className="text-2xl sm:text-3xl md:text-4xl leading-loose text-[#1B4332] font-arabic mb-4 hover:text-[#2D5F4D] transition-colors duration-200">
                       {ayat.ar}
                     </p>
                   </div>
                 </div>
 
                 {/* Transliteration */}
-                <div className="mb-4 px-4">
-                  <p className="text-yellow-300 text-right text-lg italic leading-relaxed">
+                <div className="mb-4 px-4 py-3 bg-[#FFF8E7] rounded-xl border-l-4 border-[#F4C542]">
+                  <p className="text-[#5A3825] text-right text-base sm:text-lg italic leading-relaxed font-medium">
                     {formatTransliteration(ayat.tr)}
                   </p>
                 </div>
 
                 {/* Indonesian Translation */}
-                <div className="px-4">
-                  <p className="text-slate-200 text-justify text-lg leading-relaxed">
+                <div className="px-4 py-3 bg-[#EADCC8]/30 rounded-xl">
+                  <p className="text-[#1C1C1C] text-justify text-base sm:text-lg leading-relaxed">
                     {ayat.idn}
                   </p>
                 </div>
 
                 {/* Ayat Number Indicator */}
-                <div className="text-center mt-4 pt-4 border-t border-slate-700">
-                  <span className="text-sm text-slate-400">
+                <div className="text-center mt-4 pt-4 border-t-2 border-[#1B4332]/10">
+                  <span className="text-sm text-[#5A3825] font-medium bg-[#EADCC8]/50 px-4 py-2 rounded-full">
                     Ayat {ayat.nomor} • {surah.nama_latin}
                   </span>
                 </div>
@@ -281,21 +287,25 @@ export default function SurahDetail() {
             {prevSurah && (
               <Link
                 to={`/surah/${prevSurah.nomor}`}
-                className="w-full sm:w-auto bg-gradient-to-r from-slate-800 to-blue-800 hover:from-slate-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                className="w-full sm:w-auto bg-gradient-to-r from-[#1B4332] to-[#2D5F4D] hover:from-[#2D5F4D] hover:to-[#1B4332] text-[#EADCC8] px-6 py-4 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl hover:scale-105 font-semibold"
               >
-                <IoChevronBackOutline />
-                <span>Surah Sebelumnya</span>
-                <span className="font-semibold">({prevSurah.nama_latin})</span>
+                <IoChevronBackOutline className="text-xl" />
+                <div className="text-left">
+                  <div className="text-xs text-[#F4C542]">Surah Sebelumnya</div>
+                  <div className="text-base">{prevSurah.nama_latin}</div>
+                </div>
               </Link>
             )}
             {nextSurah && (
               <Link
                 to={`/surah/${nextSurah.nomor}`}
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-800 to-slate-800 hover:from-blue-700 hover:to-slate-700 text-white px-6 py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
+                className="w-full sm:w-auto bg-gradient-to-r from-[#2D5F4D] to-[#1B4332] hover:from-[#1B4332] hover:to-[#2D5F4D] text-[#EADCC8] px-6 py-4 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl hover:scale-105 font-semibold"
               >
-                <span>Surah Selanjutnya</span>
-                <span className="font-semibold">({nextSurah.nama_latin})</span>
-                <IoChevronForwardOutline />
+                <div className="text-right">
+                  <div className="text-xs text-[#F4C542]">Surah Selanjutnya</div>
+                  <div className="text-base">{nextSurah.nama_latin}</div>
+                </div>
+                <IoChevronForwardOutline className="text-xl" />
               </Link>
             )}
           </div>
@@ -303,30 +313,6 @@ export default function SurahDetail() {
       </div>
 
       <Footer />
-
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Amiri', 'Scheherazade New', 'Arabic Typesetting', serif;
-        }
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 16px;
-          width: 16px;
-          border-radius: 50%;
-          background: #fbbf24;
-          cursor: pointer;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-        .slider::-moz-range-thumb {
-          height: 16px;
-          width: 16px;
-          border-radius: 50%;
-          background: #fbbf24;
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-      `}</style>
     </div>
   );
 }
