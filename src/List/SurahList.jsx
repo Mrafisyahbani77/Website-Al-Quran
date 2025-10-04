@@ -6,6 +6,7 @@ import { IoLocationSharp, IoSearchOutline } from "react-icons/io5";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import Icon2 from "../assets/icon2.jpeg";
+import Loader from "../Components/Loader";
 
 export default function SurahList() {
   const [surahList, setSurahList] = useState([]);
@@ -85,22 +86,9 @@ export default function SurahList() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#EADCC8] via-[#F5E6D3] to-[#E8D4BF] flex items-center justify-center">
-        <div className="text-center">
-          <div className="relative w-20 h-20 mx-auto mb-4">
-            <div className="w-20 h-20 border-4 border-[#F4C542] border-t-transparent rounded-full animate-spin"></div>
-            <img
-              src={Icon2}
-              alt="Al-Quran Icon"
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 object-contain"
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-            />
-          </div>
-          <p className="text-[#1B4332] text-lg font-semibold">Memuat Daftar Surah...</p>
-        </div>
-      </div>
+      <>
+        <Loader />
+      </>
     );
   }
 
@@ -151,11 +139,15 @@ export default function SurahList() {
               <div className="text-3xl font-bold text-[#1B4332]">
                 {surahList.length}
               </div>
-              <div className="text-[#5A3825] text-sm font-medium">Total Surah</div>
+              <div className="text-[#5A3825] text-sm font-medium">
+                Total Surah
+              </div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 border-2 border-[#F4C542] shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="text-3xl font-bold text-[#1B4332]">6,236</div>
-              <div className="text-[#5A3825] text-sm font-medium">Total Ayat</div>
+              <div className="text-[#5A3825] text-sm font-medium">
+                Total Ayat
+              </div>
             </div>
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 border-2 border-[#F4C542] shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="text-3xl font-bold text-[#1B4332]">30</div>
@@ -197,7 +189,10 @@ export default function SurahList() {
                   {filteredSurahList.length}
                 </span>{" "}
                 surah untuk pencarian "
-                <span className="text-[#C84B31] font-medium">{searchQuery}</span>"
+                <span className="text-[#C84B31] font-medium">
+                  {searchQuery}
+                </span>
+                "
               </p>
             </div>
           )}

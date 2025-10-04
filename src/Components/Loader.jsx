@@ -1,8 +1,9 @@
 import React from 'react';
+import Icon2 from "../assets/icon2.jpeg";
 
 const Loader = () => (
-  <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#EADCC8] via-[#F5E6D3] to-[#E8D4BF]">
-    <div className="relative">
+  <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-[#EADCC8] via-[#F5E6D3] to-[#E8D4BF]">
+    <div className="relative w-24 h-24">
       {/* Outer rotating ring */}
       <div className="absolute inset-0 w-24 h-24 border-4 border-[#F4C542] border-t-transparent rounded-full animate-spin"></div>
       
@@ -12,17 +13,13 @@ const Loader = () => (
       {/* Inner rotating ring */}
       <div className="absolute inset-4 w-16 h-16 border-4 border-[#C84B31] border-l-transparent rounded-full animate-spin"></div>
       
-      {/* Center icon */}
+      {/* Center Icon */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-24 h-24 flex items-center justify-center">
-          <svg 
-            className="w-10 h-10 text-[#1B4332] animate-pulse" 
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4V17c0 4.52-3.15 8.75-8 9.92-4.85-1.17-8-5.4-8-9.92V8.18l8-4zM11 7v2h2V7h-2zm0 4v6h2v-6h-2z"/>
-          </svg>
-        </div>
+        <img 
+          src={Icon2} 
+          alt="Al-Quran Icon" 
+          className="w-12 h-12 rounded-lg object-cover animate-pulse"
+        />
       </div>
       
       {/* Glow effect */}
@@ -30,18 +27,16 @@ const Loader = () => (
     </div>
     
     {/* Loading text */}
-    <div className="absolute mt-36 text-center">
+    <div className="mt-8 text-center">
       <p className="text-[#1B4332] text-lg font-bold animate-pulse">
         Memuat Al-Quran...
       </p>
-      <div className="flex gap-1 justify-center mt-2">
+      <div className="flex gap-1 justify-center mt-3">
         <span className="w-2 h-2 bg-[#F4C542] rounded-full animate-bounce"></span>
         <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
         <span className="w-2 h-2 bg-[#C84B31] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
       </div>
     </div>
-
-
   </div>
 );
 
